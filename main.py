@@ -4,9 +4,14 @@ import pyperclip
 import keyboard
 import pytesseract
 import re
+import tkinter as tk
+from datetime import datetime
+from time import strftime
 #import datetime
 
 copied_text = None
+
+number_of_books_catalogged = 0
 
 tesseract_path = r'C:\Users\paule\AppData\Local\Programs\Tesseract-OCR\tesseract.exe'
 pytesseract.pytesseract.tesseract_cmd = tesseract_path
@@ -71,6 +76,7 @@ def copy_it(cleaned_text, copied_text):
     
 
 def run_program():
+    global number_of_books_catalogged
     global copied_text
     get_image_path()
     raw_text = ocr_it(copied_text)
@@ -79,7 +85,10 @@ def run_program():
     print("Cleaned OCR Result:")
     print(cleaned_text)
     print("+=============================================================+")
+    number_of_books_catalogged += 1
+    print(f"This OP macro has helped you catalog {number_of_books_catalogged} books, with (hopefully) flawless percision and grace")
+
+
 
 keyboard.add_hotkey('F5', run_program)
 keyboard.wait('esc')
-
