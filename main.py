@@ -11,6 +11,8 @@ from time import strftime
 
 copied_text = None
 
+number_of_screenshots = 0
+
 number_of_books_catalogged = 0
 
 tesseract_path = r'C:\Users\paule\AppData\Local\Programs\Tesseract-OCR\tesseract.exe'
@@ -74,10 +76,20 @@ def copy_it(cleaned_text, copied_text):
     pyperclip.copy(combined_text)
     print(f"Copied to clipboard: {combined_text}")
     
+def take_screenshot():
+    global number_of_screenshots
+    screenshot = pyautogui.screenshot()
+    number_of_screenshots += 1    
+    screenshot_path = f"C:/Users/paul/Pictures/screenshot{number_of_screenshots}.png"
+    screenshot.save(screenshot_path)
+    print("Screenshot saved to", screenshot_path)
+
+
 
 def run_program():
     global number_of_books_catalogged
     global copied_text
+    take_screenshot()
     get_image_path()
     raw_text = ocr_it(copied_text)
     cleaned_text = clean_text(raw_text)
@@ -87,6 +99,10 @@ def run_program():
     print("+=============================================================+")
     number_of_books_catalogged += 1
     print(f"This OP macro has helped you catalog {number_of_books_catalogged} books, with (hopefully) flawless percision and grace")
+
+
+
+
 
 
 
