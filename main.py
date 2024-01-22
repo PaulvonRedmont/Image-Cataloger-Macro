@@ -4,14 +4,14 @@ import pyperclip
 import keyboard
 import pytesseract
 import re
-import datetime
+#import datetime
 
 copied_text = None
 
 tesseract_path = r'C:\Users\paule\AppData\Local\Programs\Tesseract-OCR\tesseract.exe'
 pytesseract.pytesseract.tesseract_cmd = tesseract_path
 
-timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+#timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 
 def get_image_path():
@@ -71,7 +71,6 @@ def copy_it(cleaned_text, copied_text):
     
 
 def run_program():
-    
     global copied_text
     get_image_path()
     raw_text = ocr_it(copied_text)
@@ -83,3 +82,4 @@ def run_program():
 
 keyboard.add_hotkey('F5', run_program)
 keyboard.wait('esc')
+
