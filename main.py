@@ -99,12 +99,6 @@ def run_program():
     print("+=============================================================+")
     number_of_books_catalogged += 1
     print(f"This OP macro has helped you catalog {number_of_books_catalogged} books, with (hopefully) flawless percision and grace")
-
-
-
-
-
-
-
+    
 keyboard.add_hotkey('F5', run_program)
 keyboard.wait('esc')
