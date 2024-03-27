@@ -1,3 +1,6 @@
+from PIL import ImageGrab
+import os
+from datetime import datetime
 import pyautogui
 import pyperclip
 import keyboard
@@ -10,6 +13,24 @@ end_of_book_file_path = None
 
 tesseract_path = r'C:\Users\paule\AppData\Local\Programs\Tesseract-OCR\tesseract.exe'
 pytesseract.pytesseract.tesseract_cmd = tesseract_path
+
+folder_path = r"C:\Users\paule\Pictures\AI Book Cataloging Photos"
+
+def take_screenshot_and_save(folder_path):
+    timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+    screenshot = ImageGrab.grab()
+    filename = f"screenshot_{timestamp}.png"
+    file_path = os.path.join(folder_path, filename)
+    screenshot.save(file_path)
+    print(f"Screenshot saved to: {file_path}")
+    # Define the folder path where the screenshots will be saved
+
+    
+    # Check if the folder exists, if not, create it
+    if not os.path.exists(folder_path):
+        os.makedirs(folder_path)
+
+
 
 # Import functions for handling book count
 def write_book_count(count):
@@ -51,6 +72,7 @@ def write_to_file(info):
 
 def get_image_path():
     global copied_text
+    take_screenshot_and_save(folder_path)
     pyautogui.hotkey('ctrl', 'shift', 'c')
     copied_text = pyperclip.paste().strip('\"')
     print("Image File Path:", copied_text)
@@ -82,6 +104,7 @@ def copy_it(cleaned_text, copied_text):
 
 def print_end_of_book():
     global end_of_book_file_path
+    take_screenshot_and_save(folder_path)
     pyautogui.hotkey('ctrl', 'shift', 'c')
     end_of_book_file_path = pyperclip.paste().strip('\"')
     print("End of book file path:", end_of_book_file_path)
