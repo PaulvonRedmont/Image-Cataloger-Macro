@@ -85,6 +85,9 @@ def print_end_of_book():
     pyautogui.hotkey('ctrl', 'shift', 'c')
     end_of_book_file_path = pyperclip.paste().strip('\"')
     print("End of book file path:", end_of_book_file_path)
+    end_of_book_info = f"""This book ends at: {end_of_book_file_path}
+==================================================================================================================="""
+    write_to_file(end_of_book_info)
 
 def run_program():
     global number_of_books_cataloged
@@ -101,17 +104,12 @@ def run_program():
     print(f"This OP macro has helped you catalog {number_of_books_cataloged} books total, with (hopefully) flawless precision and grace")
 
     # Create a string containing book information and current date and time
-    book_info = f"""
-=================================================================================================================== 
+    book_info = f"""=================================================================================================================== 
 Book number {number_of_books_cataloged} catalogged: {cleaned_text}
     
 File Path: {copied_text} 
     
-Date & Time of book cataloged: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
-
-This book ends at: {end_of_book_file_path}
-===================================================================================================================
-"""
+Date & Time of book cataloged: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"""
 
     # Write the information to the file
     write_to_file(book_info)
